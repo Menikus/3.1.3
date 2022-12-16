@@ -50,7 +50,7 @@ public class UserService implements org.springframework.security.core.userdetail
     @Transactional
     public void save(User user) {
         user.setPassword((new BCryptPasswordEncoder().encode(user.getPassword())));
-        user.setRole(roleService.findById(1));
+        user.setRole(roleService.findById(2));
         userRepository.save(user);
     }
 
