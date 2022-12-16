@@ -53,7 +53,6 @@ public class UserController {
     @PostMapping("/admin")
     public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingRequest) {
         if (bindingRequest.hasErrors()) return "admin/new";
-        user.setRole(roleService.findById(1));
         userService.save(user);
         return "redirect:/admin";
     }

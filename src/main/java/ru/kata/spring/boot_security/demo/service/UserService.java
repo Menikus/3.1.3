@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,10 +22,12 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(readOnly = true)
 public class UserService implements org.springframework.security.core.userdetails.UserDetailsService{
+    final RoleService roleService;
     final private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleService roleService) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
     }
 
     public List<User> findAll() {
@@ -47,6 +50,7 @@ public class UserService implements org.springframework.security.core.userdetail
     @Transactional
     public void save(User user) {
         user.setPassword((new BCryptPasswordEncoder().encode(user.getPassword())));
+        user.setRole(roleService.findById(1));
         userRepository.save(user);
     }
 
