@@ -53,7 +53,6 @@ public class UserController {
     @PostMapping("/admin")
     public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingRequest) {
         if (bindingRequest.hasErrors()) return "admin/new";
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setRole(roleService.findById(1));
         userService.save(user);
         return "redirect:/admin";
@@ -70,7 +69,6 @@ public class UserController {
     public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingRequest,
                          @PathVariable("id") int id) {
         if (bindingRequest.hasErrors()) return "admin/edit";
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userService.update(id, user);
         return "redirect:/admin";
     }

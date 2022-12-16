@@ -12,8 +12,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class RoleService{
-    @Autowired
+public class RoleService {
     private final RoleRepository roleRepository;
 
     public RoleService(RoleRepository roleRepository) {
@@ -29,15 +28,18 @@ public class RoleService{
         return role.orElse(null);
     }
 
+    @Transactional
     public void save(Role role) {
         roleRepository.save(role);
     }
 
+    @Transactional
     public void update(int id, Role updRole) {
         updRole.setId(id);
         roleRepository.save(updRole);
     }
 
+    @Transactional
     public void delete(int id) {
         roleRepository.deleteById(id);
     }
