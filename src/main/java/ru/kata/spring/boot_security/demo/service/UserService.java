@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class UserService implements org.springframework.security.core.userdetails.UserDetailsService{
     final private UserRepository userRepository;
 
