@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h1>User, <a th:utext="${user.getUsername()}">...</a></h1>
+<h1><a th:utext="${user.getUsername()}">...</a>, information-page</h1>
 <div>
     <table border="1">
         <tr>
@@ -23,8 +23,12 @@
         <td th:utext="${user.getAge()}">...</td>
         <td th:utext="${user.getEmail()}">...</td>
         <td>
-            <a th:href="@{/admin/{id}/edit(id=${user.getId()})}">Edit</a>
-            <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
+
+
+            <a th:href="@{/admin/edit(id=${user.getId()})}">Edit</a>
+
+
+            <form th:method="DELETE" th:action="@{/admin/(id=${user.getId()})}">
                 <input type="submit" value="Delete"/>
             </form>
         </td>

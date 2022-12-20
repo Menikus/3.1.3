@@ -3,8 +3,8 @@ package ru.kata.spring.boot_security.demo.util;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.RoleService;
-import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.service.RoleServiceImpl;
+import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 import javax.annotation.PostConstruct;
 import java.util.HashSet;
@@ -13,12 +13,12 @@ import java.util.Set;
 @Component
 public class Gen {
 
-    private final UserService userService;
-    private final RoleService roleService;
+    private final UserServiceImpl userServiceImpl;
+    private final RoleServiceImpl roleServiceImpl;
 
-    public Gen(UserService userService, RoleService roleService) {
-        this.userService = userService;
-        this.roleService = roleService;
+    public Gen(UserServiceImpl userServiceImpl, RoleServiceImpl roleServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
+        this.roleServiceImpl = roleServiceImpl;
     }
 
     @PostConstruct
@@ -28,8 +28,8 @@ public class Gen {
         Set<Role> adminSet = new HashSet<>();
         Set<Role> userSet = new HashSet<>();
 
-        roleService.save(roleAdmin);
-        roleService.save(roleUser);
+        roleServiceImpl.save(roleAdmin);
+        roleServiceImpl.save(roleUser);
 
         adminSet.add(roleAdmin);
         adminSet.add(roleUser);
@@ -46,8 +46,8 @@ public class Gen {
                 "user@mail.ru", userSet);
         user.setId(2);
         user.setPassword("100");
-        userService.save(admin);
-        userService.save(user);
+        userServiceImpl.save(admin);
+        userServiceImpl.save(user);
     }
 }
 
